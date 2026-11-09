@@ -23,7 +23,7 @@ Landing page de uma única página: portfólio de um editor de vídeo do nicho *
 
 - `js/videos.js` — único lugar dos vídeos: `{ url, title, thumbnail }` em `longForm` e `shorts`. `url` vazio ⇒ card vazio e o player mostra "Coming soon"; `title` vazio ⇒ sem título.
 - `index.html` — textos marcados com `<!-- EDITE -->`. O nome aparece em `<title>`, logo, intro (`h1`), `alt` da foto e rodapé; o e-mail em 3 lugares (texto, `mailto:`, `data-copy`). Redes em `ul.socials` no Contact (links abrem em nova aba; `[data-copy]` aceita `data-copy-msg` para o texto do toast).
-- Foto: `assets/img/editor.jpg` (640×640, ~44 KB), recortada em quadrado centrado no rosto a partir do original `Retrato profissional em fundo escuro.png` (raiz do projeto, 1086×1448, não é usado pelo site). Recorte feito com System.Drawing no PowerShell: lado = 79% da largura, centralizado, começando 5,5% do topo. Se a foto não existir, o `onerror` remove o `<img>` e fica o ícone placeholder.
+- Foto: `assets/img/editor.jpg` (640×640, ~40 KB, JPEG qualidade 85), recortada em quadrado centrado no rosto a partir do original `Retrato profissional em fundo escuro.png` (raiz do projeto, 1086×1448, não é usado pelo site). Recorte feito com System.Drawing no PowerShell (HighQualityBicubic): quadrado de 860px, x = 113, y = 75 (cabelo perto do topo, gola da camiseta embaixo). Se o usuário trocar o original, refaça o recorte mantendo esse enquadramento. Se a foto não existir, o `onerror` remove o `<img>` e fica o ícone placeholder.
 - Comentários voltados ao usuário ficam em português; comentários técnicos, em inglês.
 
 ## Arquitetura
