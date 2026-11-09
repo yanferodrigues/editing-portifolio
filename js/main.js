@@ -325,7 +325,7 @@
   $$('[data-copy]').forEach((btn) => {
     btn.addEventListener('click', () => {
       const text = btn.dataset.copy;
-      const done = () => toast('Email copied');
+      const done = () => toast(btn.dataset.copyMsg || 'Email copied');
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(text).then(done, () => { if (legacyCopy(text)) done(); });
       } else if (legacyCopy(text)) {

@@ -11,18 +11,18 @@ Landing page de uma única página: portfólio de um editor de vídeo do nicho *
 ## Decisões do usuário (não reverter sem ele pedir)
 
 - **Não inventar informações.** Nada de números/estatísticas, clientes, títulos ou durações de vídeos, categorias, ferramentas, bio, redes sociais, slogans. Onde faltar conteúdo, use placeholder óbvio (`Your Name`, `your@email.com`, `Write a short introduction about yourself here.`) e avise o usuário.
-- **Não adicionar o que ele não pediu.** Estrutura pedida, nesta ordem: foto redonda + nome + descrição curta (máx. 2 linhas) → Long Form → Shorts → About Me (centralizado, sem foto) → Contact (só e-mail + botão "Copy email").
+- **Não adicionar o que ele não pediu.** Estrutura pedida, nesta ordem: foto redonda + nome + descrição curta (máx. 2 linhas) → Long Form → Shorts → About Me (centralizado, sem foto) → Contact (e-mail grande + botão "Copy email", e abaixo as redes: X, Discord, YT Jobs).
 - **Estética roxa e chapada:** fundo escuro liso, roxo como acento. Sem degradês coloridos, glows ou granulado.
 - **Exatamente 3 long form e 3 shorts.** Long form um embaixo do outro (16:9); shorts lado a lado (9:16; no celular viram carrossel com swipe).
 - O vídeo toca **na própria página** (lightbox); o visitante nunca sai do site.
 - Animações "premium", mas o site deve continuar simples e com pouca informação.
-- Já removidos a pedido dele: headline/hero principal, faixa marquee rolando, tela de carregamento, botão de showreel, foto grande no About, estatísticas, lista de ferramentas, relógio, links de redes sociais, granulado.
-- Já preenchido com dados do usuário: nome **Yan Rodrigues**, e-mail `yanfelipe678@gmail.com`, foto e os 6 vídeos (YouTube; todos com embed liberado, conferido via oEmbed). Ainda provisórios: a descrição da intro ("Video editor for gaming content — long form & shorts.", escrita só com o que o usuário disse) e o texto do About Me (placeholder).
+- Já removidos a pedido dele: headline/hero principal, faixa marquee rolando, tela de carregamento, botão de showreel, foto grande no About, estatísticas, lista de ferramentas, relógio, granulado. (Redes sociais foram removidas antes, mas depois ele pediu de volta só no Contact.)
+- Já preenchido com dados do usuário: nome **Yan Rodrigues**, e-mail `yanrodrigues.editor@gmail.com` (substituiu o antigo `yanfelipe678@gmail.com` a pedido dele), redes (X `https://x.com/yaneditorr`, Discord `@yaneditorr` — sem link público, o botão copia o usuário —, YT Jobs `https://ytjobs.co/talent/profile/662878`), foto e os 6 vídeos (YouTube; todos com embed liberado, conferido via oEmbed). Ainda provisórios: a descrição da intro ("Video editor for gaming content — long form & shorts.", escrita só com o que o usuário disse) e o texto do About Me (placeholder).
 
 ## Onde o conteúdo é editado
 
 - `js/videos.js` — único lugar dos vídeos: `{ url, title, thumbnail }` em `longForm` e `shorts`. `url` vazio ⇒ card vazio e o player mostra "Coming soon"; `title` vazio ⇒ sem título.
-- `index.html` — textos marcados com `<!-- EDITE -->`. O nome aparece em `<title>`, logo, intro (`h1`), `alt` da foto e rodapé; o e-mail em 3 lugares (texto, `mailto:`, `data-copy`).
+- `index.html` — textos marcados com `<!-- EDITE -->`. O nome aparece em `<title>`, logo, intro (`h1`), `alt` da foto e rodapé; o e-mail em 3 lugares (texto, `mailto:`, `data-copy`). Redes em `ul.socials` no Contact (links abrem em nova aba; `[data-copy]` aceita `data-copy-msg` para o texto do toast).
 - Foto: `assets/img/editor.jpg` (640×640, ~44 KB), recortada em quadrado centrado no rosto a partir do original `Retrato profissional em fundo escuro.png` (raiz do projeto, 1086×1448, não é usado pelo site). Recorte feito com System.Drawing no PowerShell: lado = 79% da largura, centralizado, começando 5,5% do topo. Se a foto não existir, o `onerror` remove o `<img>` e fica o ícone placeholder.
 - Comentários voltados ao usuário ficam em português; comentários técnicos, em inglês.
 
