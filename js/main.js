@@ -5,9 +5,22 @@
   'use strict';
 
   const root = document.documentElement;
-  const data = window.PORTFOLIO || {};
-  const longForm = Array.isArray(data.longForm) ? data.longForm : [];
-  const shorts = Array.isArray(data.shorts) ? data.shorts : [];
+  // Each page picks its own list in js/videos.js via <body data-portfolio="...">
+  const page = document.body.dataset.portfolio || 'gaming';
+  const data = (window.PORTFOLIO || {})[page] || {};
+  // Pages in subfolders set data-root="../" so relative paths in videos.js still
+  // point at the site root (e.g. "assets/img/cover.jpg" or a local .mp4)
+  const siteRoot = document.body.dataset.root || '';
+  const fromRoot = (u) => (!u || /^([a-z][a-z\d+.-]*:|\/|#)/i.test(u) ? u : siteRoot + u);
+  // Entries without a link are skipped: a card only exists when there is a video
+  const normalize = (list) => (Array.isArray(list) ? list : [])
+    .filter((item) => item && String(item.url || '').trim())
+    .map((item) => Object.assign({}, item, {
+      url: fromRoot(item.url.trim()),
+      thumbnail: fromRoot(item.thumbnail)
+    }));
+  const longForm = normalize(data.longForm);
+  const shorts = normalize(data.shorts);
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const parse = window.VideoUtils ? window.VideoUtils.parse : function () { return null; };
@@ -55,6 +68,16 @@
   if (longList) longList.innerHTML = longForm.map((item, i) => card(item, i, 'long')).join('');
   const shortsTrack = $('[data-shorts-track]');
   if (shortsTrack) shortsTrack.innerHTML = shorts.map((item, i) => card(item, i, 'shorts')).join('');
+
+  // A section with no videos is hidden, together with its menu links
+  [['long-form', longForm], ['shorts', shorts]].forEach(([id, list]) => {
+    if (list.length) return;
+    const section = document.getElementById(id);
+    if (section) section.hidden = true;
+    $$('a[href="#' + id + '"]').forEach((a) => { a.hidden = true; });
+  });
+  // keep the mobile menu stagger continuous after hiding links
+  $$('.mobile-menu__nav a:not([hidden]) .line > span').forEach((s, i) => s.style.setProperty('--i', i));
 
   // Thumbnails: try each source in order (custom → maxres → sd → hq)
   $$('img[data-thumbs]').forEach((img) => {
