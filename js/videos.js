@@ -26,8 +26,8 @@ window.PORTFOLIO = {
   gaming: {
     /* LONG FORM — aparecem um embaixo do outro */
     longForm: [
-      { url: "https://youtu.be/DeZU0CDFkzo?si=hwldvPp_f7p06h0v", title: "", thumbnail: "" },
       { url: "https://youtu.be/NBOZDkYk7fM?si=cDXY-Tw39Nuckbeq", title: "", thumbnail: "" },
+      { url: "https://youtu.be/DeZU0CDFkzo?si=hwldvPp_f7p06h0v", title: "", thumbnail: "" },
       { url: "https://youtu.be/uDTmuXUL7VA?si=OyaViVWeW_x9xVt4", title: "", thumbnail: "" },
       { url: "https://youtu.be/pJSOUStRLH4?si=oF6rqv1kr1BbRDKD", title: "", thumbnail: "" },
       { url: "https://youtu.be/Ki_Rww7Dbs0?si=XuC9WImjyIPe06O_", title: "", thumbnail: "" }
